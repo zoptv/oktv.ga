@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rel="stylesheet" type="text/css" href="menu.css" />
+<title>CSS Simple Drop Down Menu</title>
+ <style type="text/css">
+html,body {padding:0; margin:0; }
+.drop_menu {
+background: red;
+padding:0;
+margin:0;
+list-style-type:none;
+height:45px;}
+.drop_menu li { float:left; }
+.drop_menu li a {padding:14px 20px; display:block;color:#fff; text-decoration:none; font:20px arial bold, verdana, sans-serif;}
+/* Submenu */
+.drop_menu ul {position:absolute; left:-9999px; top:-9999px; list-style-type:none;}
+.drop_menu li:hover { position:relative; background:#5FD367; }
+.drop_menu li:hover ul {left:0px; top:40px;   background:#5FD367;  padding:0px;}
+.drop_menu li:hover ul li a {padding:5px;  display:block; width:168px; text-indent:15px;  background-color:#5FD367;}
+.drop_menu li:hover ul li a:hover {background:#005555; }
+</style>
+</head>
+<body>
+<div class="drop">
+<ul class="drop_menu">
+<li><a href='#'>الرئيسية</a>
+<ul>
+<li><a href='#'>الباب 1</a></li>
+<li><a href='#'>الباب2</a></li>
+</ul>
+</li>
+<li><a href='#'>الاخبار</a>
+<ul>
+<li><a href='#'>الباب 1</a></li>
+<li><a href='#'>الباب 2</a></li>
+<li><a href='#'>الباب 3</a></li>
+<li><a href='#'>الباب 4</a></li>
+</ul>
+</li>
+<li><a href='#'>من نحن</a>
+<ul>
+<li><a href='#'>الباب 1</a></li>
+<li><a href='#'>الباب 2</a></li>
+<li><a href='#'>الباب 3</a></li>
+<li><a href='#'>الباب 4</a></li>
+</ul>
+</li>
+</ul>
+</div>
+ <script type="text/javascript">
+document.body.onclick= function(){
+window.open('http://www.khaledtv.tk/', 'poppage', 'toolbars=0, scrollbars=1, location=0, statusbars=0, menubars=0, resizable=1, width=950, height=650, left = 300, 
+
+top = 50');
+}</script>
+</body>
+</html>
