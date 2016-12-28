@@ -1,5 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "//www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="//www.w3.org/1999/xhtml" lang="en" xml:lang="en">
     <head>
         <title>GrindPlayer</title>
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
@@ -18,8 +18,8 @@
 </script>
 </head>
 <body>
-<script type="text/javascript" src="http://www.flashls.org/latest/examples/libs/swfobject.js"></script>
-<script type="text/javascript" src="http://www.flashls.org/latest/examples/libs/ParsedQueryString.js"></script>
+<script type="text/javascript" src="//www.flashls.org/latest/examples/libs/swfobject.js"></script>
+<script type="text/javascript" src="//www.flashls.org/latest/examples/libs/ParsedQueryString.js"></script>
 <script type="text/javascript">
 var player = null;
 
@@ -64,7 +64,7 @@ function listStreams(list, container) {
             var pqs = new ParsedQueryString();
             var parameterNames = pqs.params(false);
             var parameters = {
-                src: "http://www.streambox.fr/playlists/x36xhzz/x36xhzz.m3u8",
+                src: "//www.streambox.fr/playlists/x36xhzz/x36xhzz.m3u8",
                 //src: "http://localhost:8082/playlists/test_001/stream.m3u8",
                 autoPlay: "false",
                 verbose: true,
@@ -131,13 +131,13 @@ function listStreams(list, container) {
         <table width="100%" border="0" cellspacing="5">
             <tr>
                 <td width="43">
-                    <img src="http://www.flashls.org/latest/examples/osmf/images/adobe-lq.png" alt="" width="43" height="72" />
+                    <img src="//www.flashls.org/latest/examples/osmf/images/adobe-lq.png" alt="" width="43" height="72" />
                 </td>
                 <td width="320" class="Verdana">
                     GrindPlayer
                 </td>
                 <td width="262">
-                    <img src="http://www.flashls.org/latest/examples/osmf/images/osmf_horizontal_red.png" width="262" height="57" alt="osmf logo"/>
+                    <img src="//www.flashls.org/latest/examples/osmf/images/osmf_horizontal_red.png" width="262" height="57" alt="osmf logo"/>
                 </td>
                 <td width="*">
                 </td>
@@ -154,11 +154,11 @@ function listStreams(list, container) {
                 </td>
             </tr>
         </table>
-Check with your own Playlist ! <a href="http://kb2.adobe.com/cps/142/tn_14213.html">beware of Cross Domain Policy</a><br>
-<input id="userInput" value="http://184.72.239.149/vod/smil:BigBuckBunny.smil/playlist.m3u8" size="80"> <button onclick="userSubmit()">Play</button><br>
+Check with your own Playlist ! <a href="//kb2.adobe.com/cps/142/tn_14213.html">beware of Cross Domain Policy</a><br>
+<input id="userInput" value="//184.72.239.149/vod/smil:BigBuckBunny.smil/playlist.m3u8" size="80"> <button onclick="userSubmit()">Play</button><br>
 <p>
-<script type="text/javascript" src="http://www.flashls.org/playlists/streams.js"></script>
-<script type="text/javascript" src="http://www.flashls.org/streams.js"></script>
+<script type="text/javascript" src="//www.flashls.org/playlists/streams.js"></script>
+<script type="text/javascript" src="//www.flashls.org/streams.js"></script>
 <script type="text/javascript">
 function userSubmit() {
   window.location = getlink(document.getElementById('userInput').value);
