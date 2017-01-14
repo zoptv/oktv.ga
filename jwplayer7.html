@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "//www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="//www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+	<head>
+		<title></title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script src="//demo.unified-streaming.com/players/jwplayer-7.0.1/jwplayer.js"></script>
+    
+    <script type="text/javascript">
+      function gup( name )
+      {
+        name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+        var regexS = "[\\?&]"+name+"=([^&#]*)";
+        var regex = new RegExp( regexS );
+        var results = regex.exec( window.location.href );
+        if( results == null )
+          return "";
+        else
+          return unescape(results[1]);
+      }
+      document.title = "JWPlayer 7 MPEG-DASH " + gup('file');
+		</script>
+
+    <style type="text/css">
+      html {
+        height: 100%;
+        overflow: hidden;
+      }
+      #flashcontent {
+        height: 100%;
+      }
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        background-color: #000;
+      }
+    </style>
+	</head>
+	<body>
+   <div id="myElement">Loading the player...</div>
+    <script type="text/javascript">
+      var file = gup('file');
+      jwplayer.key="QZmsQXYWSubDbu6xMaztMwYR1sv4uHkcGB7r1A==";
+      var playerInstance = jwplayer("myElement");
+      playerInstance.setup({
+            file:  gup('file').replace(/(%)/g,"%25"),
+            //image: "https://khaledstar.github.io/img/Untitled-1.png",
+            width: "100%",
+            height: "100%",
+            dash: true,
+            autostart: true
+            
+            //title: 'Basic Video Embed',
+            //description: 'A video with a basic title and description!'
+      });
+      
+    </script>
+	</body>
+</html>
