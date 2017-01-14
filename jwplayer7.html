@@ -44,12 +44,12 @@
       var playerInstance = jwplayer("myElement");
       playerInstance.setup({
             file:  gup('file').replace(/(%)/g,"%25"),
-            image: "https://khaledstar.github.io/img/Untitled-1.png",
+            image: gup('image').replace(/(%)/g,"%25"),
             width: "100%",
             height: "100%",
             dash: "true",
 	    stretching: "exactfit",
-            autostart: "false",
+            autostart: "",
             
             //title: 'Basic Video Embed',
             //description: 'A video with a basic title and description!'
