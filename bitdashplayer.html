@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "//www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="//www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+	<head>
+		<title></title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<script type="text/javascript" src="//demo.unified-streaming.com/players/bitdash-2.0.2/bitdash.min.js"></script>
+		<script type="text/javascript">
+
+      function gup( name )
+      {
+        name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+        var regexS = "[\\?&]"+name+"=([^&#]*)";
+        var regex = new RegExp( regexS );
+        var results = regex.exec( window.location.href );
+        if( results == null )
+          return "";
+        else
+          return decodeURIComponent(results[1]);
+      }
+
+      document.title = "Bitdash HTTP Streaming " + gup('file');
+		</script>
+
+    <style type="text/css">
+      html {
+        height: 100%;
+        overflow: hidden;
+      }
+      #flashcontent {
+        height: 100%;
+      }
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        background-color: #000;
+      }
+    </style>
+	</head>
+	<body>
+
+    <div id="wrapper">
+      <div id="player"></div>
+    </div>
+
+    <script type="text/javascript">
+      var file = gup('file');
+
+      // There is a bug in the bitdash player that requires double escaping the mpd URL (it doesn't handle & correctly).
+      //  This is only relevant for the dynamic track selection URLs (and only when Flash is used, HTML works correctly).
+
+      var conf = {
+        key:       "70dd245def25414c6945f3abd4340a40",
+        source:    {
+          mpd:       gup('file').replace(/(%)/g,"%25"),
+//        mobilempd: escape(file)
+//        hls:       "http://alarabiya-geo-live.hls.adaptive.level3.net/hls-live/alarabiya-channel01/_definst_/live/stream1.m3u8",
+//        poster:    "https://khaledstar.github.io/img/Untitled-1.png"
+        },
+        playback: {
+          autoplay:  true,
+          muted:     false
+        },
+        style: {
+          width: '100%',
+          height: '100%'
+        },
+        events: {
+          onError: function(data) { 
+            console.error("bitdash error: " + data.code + ": " + data.message);
+          },
+          onReady: function(obj)  { 
+            console.log(this.getVersion() + ' onReady: ', obj);
+          }
+        }
+      }
+
+      var player = bitdash("player").setup(conf);
+    </script>
+
+	</body>
+</html>
