@@ -1,4 +1,7 @@
-<html idmmzcc-ext-docid="402671616" lang="en"><link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css"><head>
+<!DOCTYPE html>
+<html lang="en" class="">
+<link rel="stylesheet" href="https://www.hlsplayer.net/libs/font-awesome/css/font-awesome.min.css">
+<head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1,shrink-to-fit=no">
@@ -349,11 +352,11 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga
 						</span>
 					</div>
 				</form>
-
-				<div id="player-container">
-					<object type="application/x-shockwave-flash" id="player" data="https://www.hlsplayer.net/player/grindplayer/GrindPlayer.swf" style="visibility: visible;" width="640" height="480"><param name="allowFullScreen" value="true"><param name="allowScriptAccess" value="always"><param name="wmode" value="opaque"><param name="flashvars" value="autoPlay=true&amp;src=&amp;streamType=live&amp;scaleMode=letterbox"></object>
-					<div id="player-tip" style="display: none;"></div>
+<div id="player-container">
+					<div id="player"></div>
+					<div id="player-tip"></div>
 				</div>
+				
 			</div>
 		</div>
 
@@ -442,5 +445,5 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga
 			$('#player-form').submit(play);
 		});
 	</script>
-
-</body></html>
+</body>
+</html>
