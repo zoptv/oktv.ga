@@ -1,0 +1,255 @@
+<!doctype html>
+<html>
+<head>
+  <title>JW Player Stream Tester</title>
+  <link rel="icon" type="image/x-icon" href="//www.jwplayer.com/wp-content/themes/jwplayer-105/favicon.ico">
+  <link type="text/css" rel="stylesheet" href="//demo.jwplayer.com/stream-tester/reset.css">
+  <link type="text/css" rel="stylesheet" href="//demo.jwplayer.com/stream-tester/style.css">
+   <script src="https://khaledstar.github.io/jwplayer/player.js"></script>
+    <script type="text/javascript">jwplayer.key="PGgFJsWEYKNtcZg83ecIc3A2ps5xjxJ1PeByACleTpY=";</script>
+  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+  <script src="//apis.google.com/js/client.js"></script>
+  <script type='text/javascript'>
+ function makeShort()
+    {
+        var longUrl=document.getElementById("longurl").value;
+        var request = gapi.client.urlshortener.url.insert({
+          'resource': {
+          'longUrl': longUrl
+        }
+        });
+        request.execute(function(response){
+            if(response.id != null){
+                str ="<br /><br />";
+                str +="<b>Short URL:</b> <a href='"+response.id+"'>"+response.id+"</a><br>";
+                document.getElementById("output").innerHTML = str;
+            }
+        });
+     }
+    function load(){
+        gapi.client.setApiKey('AIzaSyCCd7R6tUAGAwFNlq0hV_C7GWNEZNhzxa4');
+        gapi.client.load('urlshortener', 'v1',function(){document.getElementById("output").innerHTML="";});
+    }
+    window.onload = load;
+    $(document).ready(function () {
+    var theFile	 = '';
+        $.extend({
+            initialize: function () {
+                window.top.location.search.replace(/\??(?:([^=]+)=([^&]*)&?)/g, function () {
+                    if (arguments[1] == 'config') {
+                        $("#setupOptions").val(decodeURIComponent(arguments[2]));
+                    }
+                });
+            },
+            setupPlayer: function () {
+                var defaults = {
+                    file: 'http://wowza.jwplayer.com:1935/live/jelly.stream/playlist.m3u8',
+                    stretching : 'exactfit',
+                    width: '580',
+                    height: '370',
+                    primary: 'html5',
+					hlshtml: true,
+					type: 'hls'
+                };
+                var optionText = $("#setupOptions").val();
+                var evalOptions;
+                try {
+                    evalOptions = optionText ? eval('(' + optionText + ')') : undefined;
+                } catch (e) {
+                    optionText = decodeURIComponent(optionText);
+                    evalOptions = optionText ? eval('(' + optionText + ')') : undefined;
+                    $("#setupOptions").val(optionText);
+                }
+                if (optionText && typeof (evalOptions) == "undefined") {
+                    return;
+                }
+                var options = $.extend({}, defaults, evalOptions);
+                jwplayer('my-video').setup(options);
+            },
+            setupForm: function () {
+                for (var i in $_GET) {
+                    if ($_GET[i]) {
+                        $("#flashvars").text($("#flashvars").text() + i + "=" + $_GET[i] + "\n");
+                    }
+                }
+            }
+        });
+        $("#theForm2").click(function () {
+            var url = window.top.location.pathname + "?config=";
+            url += encodeURIComponent($("#setupOptions").val());
+            window.top.location.href = url;
+            return false;
+        });
+        var $_GET = {};
+        $.initialize();
+        $.setupPlayer();
+        $.setupForm();
+    	var optionText = $("#setupOptions").val();
+    	optionText = optionText.toString();
+    	optionText = optionText.replace(/",/g, '",<br />')
+    	optionText = optionText.replace(/{/g, "{<br />")
+    	optionText = optionText.replace(/}/g, "}<br />")
+    	if(document.getElementById("setupOptions").value != ""){
+    		document.getElementById('theCode').innerHTML = '&lt;script&gt;jwplayer.key=&quot;INSERT_YOUR_KEY_HERE&quot;&lt;/script&gt;<br /><br />&lt;div id=&quot;my-video&quot;&gt;&lt;/div&gt;<br />&lt;script type=&quot;text/javascript&quot;&gt;<br />jwplayer("my-video").setup(' + optionText + ');<br />&lt;/script&gt;';
+    	}
+    });
+    function loadHls(){
+if (document.getElementById('hls').checked === false && document.getElementById('hlshtml').checked === true) {
+//console.log("No force HLS, Use HTML")
+			var thePlayer = jwplayer('my-video').setup({
+			file: ''+document.getElementById('theFile').value+'',
+                                                 stretching : 'exactfit',
+			width: '580',
+			height: '370',
+			hlshtml:true,
+			autostart: true
+			});
+			var thePlayer2 = '{file: "'+document.getElementById('theFile').value+'",width: "580",height: "370",primary: "flash",type: "hls"}'
+			document.getElementById("setupOptions").value = thePlayer2;
+			document.getElementById('theCode').innerHTML = '&lt;div id=&quot;my-video&quot;&gt;&lt;/div&gt;<br />&lt;script type=&quot;text/javascript&quot;&gt;<br />jwplayer("my-video").setup({<br /> file: "'+document.getElementById('theFile').value+'",<br /> width: "580",<br /> height: "370",<br /> hlshtml: true<br />});<br />&lt;/script&gt;'
+        } 
+else if (document.getElementById('hls').checked === true && document.getElementById('hlshtml').checked === true){
+//console.log("Force HLS, Use HTML")
+      var thePlayer = jwplayer('my-video').setup({
+      file: ''+document.getElementById('theFile').value+'',
+      stretching : 'exactfit',
+      width: '580',
+      height: '370',
+      autostart: true,
+      hlshtml: true,
+      type: 'hls'
+      });
+			var thePlayer2 = '{file: "'+document.getElementById('theFile').value+'",width: "580",height: "370",primary: "html5",hlshtml:true}'
+			document.getElementById("setupOptions").value = thePlayer2;
+			document.getElementById('theCode').innerHTML = '&lt;div id=&quot;my-video&quot;&gt;&lt;/div&gt;<br />&lt;script type=&quot;text/javascript&quot;&gt;<br />jwplayer("my-video").setup({<br /> file: "'+document.getElementById('theFile').value+'",<br /> width: "580",<br /> height: "370",<br /> hlshtml: true,<br /> type: "hls"<br />});<br />&lt;/script&gt;'
+		    } 
+else if(document.getElementById('hls').checked === true && document.getElementById('hlshtml').checked === false) {
+//console.log("Force HLS, Use Flash")
+			var thePlayer = jwplayer('my-video').setup({
+			file: ''+document.getElementById('theFile').value+'',
+                                                stretching : 'exactfit',
+			width: '580',
+			height: '370',
+                                                type: 'hls',
+                                                primary: 'flash',
+			autostart: true
+			});
+			var thePlayer2 = '{file: "'+document.getElementById('theFile').value+'",width: "580",height: "370",primary: "flash"}'
+			document.getElementById("setupOptions").value = thePlayer2;
+			document.getElementById('theCode').innerHTML = '&lt;div id=&quot;my-video&quot;&gt;&lt;/div&gt;<br />&lt;script type=&quot;text/javascript&quot;&gt;<br />jwplayer("my-video").setup({<br /> file: "'+document.getElementById('theFile').value+'",<br /> width: "580",<br /> height: "370",<br /> primary: "flash",<br /> type: "hls" });<br />&lt;/script&gt;'
+		} 
+else if(document.getElementById('hls').checked === false && document.getElementById('hlshtml').checked === false) {
+//console.log("Don't force HLS, Primary Flash")
+      var thePlayer = jwplayer('my-video').setup({
+      file: ''+document.getElementById('theFile').value+'',
+      stretching : 'exactfit',
+      width: '580',
+      height: '370',
+      primary: 'flash',
+      autostart: true
+      });
+      var thePlayer2 = '{file: "'+document.getElementById('theFile').value+'",width: "580",height: "370",primary: "flash"}'
+      document.getElementById("setupOptions").value = thePlayer2;
+      document.getElementById('theCode').innerHTML = '&lt;div id=&quot;my-video&quot;&gt;&lt;/div&gt;<br />&lt;script type=&quot;text/javascript&quot;&gt;<br />jwplayer("my-video").setup({<br /> file: "'+document.getElementById('theFile').value+'",<br /> width: "580",<br /> height: "370",<br /> primary: "flash"<br /> });<br />&lt;/script&gt;'
+    }
+else {
+      var thePlayer = jwplayer('my-video').setup({
+      file: ''+document.getElementById('theFile').value+'',
+      stretching : 'exactfit',
+      width: '580',
+      height: '370',
+      autostart: true,
+      primary: 'flash'
+      });
+      var thePlayer2 = '{file: "'+document.getElementById('theFile').value+'",width: "580",height: "370",primary: "flash"}'
+      document.getElementById("setupOptions").value = thePlayer2;
+      document.getElementById('theCode').innerHTML = '&lt;div id=&quot;my-video&quot;&gt;&lt;/div&gt;<br />&lt;script type=&quot;text/javascript&quot;&gt;<br />jwplayer("my-video").setup({<br /> file: "'+document.getElementById('theFile').value+'",<br /> width: "580",<br /> height: "370",<br /> primary: "flash",<br /> });<br />&lt;/script&gt;'
+    }
+    }
+    </script>
+<style type="text/css">
+	p {
+    line-height: 0px;
+    margin: 0 0 1em;
+	}
+	</style>
+</head>
+<body class="demo_page">
+
+<header id="site_header" role="banner">
+  <div class="section_wrapper">
+    <a href="//www.khaledtv.tk/" class="logo" title="JW Player" rel="home">www.khaledtv.tk</a>
+		<nav role="navigation">
+			<ul class="subnav">
+				<li><a href="">JavaScript API Reference</a></li>              
+			</ul>
+		</nav>
+		<div class="cap_left">&nbsp;</div><div class="cap_right">&nbsp;</div>
+  </div> <!-- section_wrapper -->  
+</header> <!-- header -->
+
+<section id="demo_test">
+  <div class="section_wrapper clearfix">
+    <div class="demo_sidebar">
+      <h1>JW Player Stream Tester</h1>
+
+      <form onsubmit="return false;">
+        <h2>Stream to Load</h2>
+        <p>
+          <input type="text" id="theFile" autocomplete="off" value="http://playertest.longtailvideo.com/adaptive/bbbfull/bbbfull.m3u8" onfocus="this.value = this.value=='http://playertest.longtailvideo.com/adaptive/bbbfull/bbbfull.m3u8'?'':this.value;" onblur="this.value = this.value==''?'http://playertest.longtailvideo.com/adaptive/bbbfull/bbbfull.m3u8':this.value;" />
+          <input type="button" name="load" value="Load Stream" class="small primary button" onclick="loadHls();"> 
+        </p>
+      </form>
+	  
+	  <form>
+	  <p>
+      <input type="checkbox" id="hlshtml" name="hlshtml" value="hlshtml" checked> <strong style="color:#000;">Attempt to render in HTML5</strong><br /> 
+		  <input type="checkbox" id="hls" name="hls" value="hls"> <strong style="color:#000;">Force type: 'hls' (Use for tokenized M3U8)</strong>
+	  <p>		
+	  </form>
+      
+      <form id="theForm2" name="theForm2">
+        <fieldset style="display:none;">
+          <textarea id="setupOptions" style="display:none;"></textarea>
+        </fieldset>
+        <input type="button" value="Setup Player" onclick="$.setupPlayer()" style="display:none;" />
+        <p><a href="#" id="submitBtn" class="small primary button" style="display:none;">Save URL</a></p>
+      </form>
+	  
+	  <br />
+	  
+	  <p id="output"></p>
+
+<div id="theLink">
+</div>
+</div> <!-- demo_sidebar -->
+
+    <div class="demo_main">
+      <div id='my-video'></div>
+            
+      <h2 id="title">Player Embed code:</h2>
+
+      <script type="text/javascript">
+		jwplayer('my-video').onError(function(evt){
+			try { console.log(evt.message); } catch(e) {}
+		});
+      function selectText(containerid) {
+          if (document.selection) {
+              var range = document.body.createTextRange();
+              range.moveToElementText(document.getElementById(containerid));
+              range.select();
+          } else if (window.getSelection) {
+              var range = document.createRange();
+              range.selectNode(document.getElementById(containerid));
+              window.getSelection().addRange(range);
+          }
+      }
+      </script>
+      <pre id="theCode" onclick="selectText('theCode')">Load an HLS stream to view embed code</pre>
+    </div> <!-- demo_main -->
+    
+  </div> <!-- section_wrapper -->
+</section> <!-- demo_test -->
+
+</body>
+</html>
