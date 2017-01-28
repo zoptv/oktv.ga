@@ -45,8 +45,8 @@
                 var defaults = {
                     file: 'http://wowza.jwplayer.com:1935/live/jelly.stream/playlist.m3u8',
                     stretching : 'exactfit',
-                    width: '580',
-                    height: '370',
+                    width: '880',
+                    height: '550',
                     primary: 'html5',
 					hlshtml: true,
 					type: 'hls'
@@ -99,27 +99,27 @@ if (document.getElementById('hls').checked === false && document.getElementById(
 			var thePlayer = jwplayer('my-video').setup({
 			file: ''+document.getElementById('theFile').value+'',
                                                  stretching : 'exactfit',
-			width: '580',
-			height: '370',
+			width: '880',
+			height: '550',
 			hlshtml:true,
 			autostart: true
 			});
-			var thePlayer2 = '{file: "'+document.getElementById('theFile').value+'",width: "580",height: "370",primary: "flash",type: "hls"}'
+			var thePlayer2 = '{file: "'+document.getElementById('theFile').value+'",width: "880",height: "550",primary: "flash",type: "hls"}'
 			document.getElementById("setupOptions").value = thePlayer2;
-			document.getElementById('theCode').innerHTML = '&lt;div id=&quot;my-video&quot;&gt;&lt;/div&gt;<br />&lt;script type=&quot;text/javascript&quot;&gt;<br />jwplayer("my-video").setup({<br /> file: "'+document.getElementById('theFile').value+'",<br /> width: "580",<br /> height: "370",<br /> hlshtml: true<br />});<br />&lt;/script&gt;'
+			document.getElementById('theCode').innerHTML = '&lt;div id=&quot;my-video&quot;&gt;&lt;/div&gt;<br />&lt;script type=&quot;text/javascript&quot;&gt;<br />jwplayer("my-video").setup({<br /> file: "'+document.getElementById('theFile').value+'",<br /> width: "880",<br /> height: "550",<br /> hlshtml: true<br />});<br />&lt;/script&gt;'
         } 
 else if (document.getElementById('hls').checked === true && document.getElementById('hlshtml').checked === true){
 //console.log("Force HLS, Use HTML")
       var thePlayer = jwplayer('my-video').setup({
       file: ''+document.getElementById('theFile').value+'',
       stretching : 'exactfit',
-      width: '580',
-      height: '370',
+      width: '880',
+      height: '550',
       autostart: true,
       hlshtml: true,
       type: 'hls'
       });
-			var thePlayer2 = '{file: "'+document.getElementById('theFile').value+'",width: "580",height: "370",primary: "html5",hlshtml:true}'
+			var thePlayer2 = '{file: "'+document.getElementById('theFile').value+'",width: "880",height: "550",primary: "html5",hlshtml:true}'
 			document.getElementById("setupOptions").value = thePlayer2;
 			document.getElementById('theCode').innerHTML = '&lt;div id=&quot;my-video&quot;&gt;&lt;/div&gt;<br />&lt;script type=&quot;text/javascript&quot;&gt;<br />jwplayer("my-video").setup({<br /> file: "'+document.getElementById('theFile').value+'",<br /> width: "580",<br /> height: "370",<br /> hlshtml: true,<br /> type: "hls"<br />});<br />&lt;/script&gt;'
 		    } 
@@ -134,7 +134,7 @@ else if(document.getElementById('hls').checked === true && document.getElementBy
                                                 primary: 'flash',
 			autostart: true
 			});
-			var thePlayer2 = '{file: "'+document.getElementById('theFile').value+'",width: "580",height: "370",primary: "flash"}'
+			var thePlayer2 = '{file: "'+document.getElementById('theFile').value+'",width: "880",height: "550",primary: "flash"}'
 			document.getElementById("setupOptions").value = thePlayer2;
 			document.getElementById('theCode').innerHTML = '&lt;div id=&quot;my-video&quot;&gt;&lt;/div&gt;<br />&lt;script type=&quot;text/javascript&quot;&gt;<br />jwplayer("my-video").setup({<br /> file: "'+document.getElementById('theFile').value+'",<br /> width: "580",<br /> height: "370",<br /> primary: "flash",<br /> type: "hls" });<br />&lt;/script&gt;'
 		} 
@@ -148,7 +148,7 @@ else if(document.getElementById('hls').checked === false && document.getElementB
       primary: 'flash',
       autostart: true
       });
-      var thePlayer2 = '{file: "'+document.getElementById('theFile').value+'",width: "580",height: "370",primary: "flash"}'
+      var thePlayer2 = '{file: "'+document.getElementById('theFile').value+'",width: "880",height: "550",primary: "flash"}'
       document.getElementById("setupOptions").value = thePlayer2;
       document.getElementById('theCode').innerHTML = '&lt;div id=&quot;my-video&quot;&gt;&lt;/div&gt;<br />&lt;script type=&quot;text/javascript&quot;&gt;<br />jwplayer("my-video").setup({<br /> file: "'+document.getElementById('theFile').value+'",<br /> width: "580",<br /> height: "370",<br /> primary: "flash"<br /> });<br />&lt;/script&gt;'
     }
@@ -156,12 +156,12 @@ else {
       var thePlayer = jwplayer('my-video').setup({
       file: ''+document.getElementById('theFile').value+'',
       stretching : 'exactfit',
-      width: '580',
-      height: '370',
+      width: '880',
+      height: '550',
       autostart: true,
       primary: 'flash'
       });
-      var thePlayer2 = '{file: "'+document.getElementById('theFile').value+'",width: "580",height: "370",primary: "flash"}'
+      var thePlayer2 = '{file: "'+document.getElementById('theFile').value+'",width: "880",height: "550",primary: "flash"}'
       document.getElementById("setupOptions").value = thePlayer2;
       document.getElementById('theCode').innerHTML = '&lt;div id=&quot;my-video&quot;&gt;&lt;/div&gt;<br />&lt;script type=&quot;text/javascript&quot;&gt;<br />jwplayer("my-video").setup({<br /> file: "'+document.getElementById('theFile').value+'",<br /> width: "580",<br /> height: "370",<br /> primary: "flash",<br /> });<br />&lt;/script&gt;'
     }
