@@ -1,4 +1,4 @@
-﻿/*!
+/*!
 Video.js Default Styles (http://videojs.com)
 Version 4.6.4
 Create your own skin at http://designer.videojs.com
@@ -20,8 +20,10 @@ The control icons are from a custom font. Each icon corresponds to a character
 */
 @font-face {
   font-family: 'VideoJS';
-  src: url('font/vjs.eot');
-  src: url('font/vjs.eot?#iefix') format('embedded-opentype'), url('font/vjs.woff') format('woff'), url('font/vjs.ttf') format('truetype');
+  src: url('http://www.flashls.org/videojs/font/vjs.eot');
+  src: url('http://www.flashls.org/videojs/font/vjs.eot?#iefix') format('embedded-opentype'),
+ url('http://www.flashls.org/videojs/font/vjs.woff') format('woff'), 
+url('http://www.flashls.org/videojs/font/vjs.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
