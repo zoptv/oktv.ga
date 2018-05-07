@@ -3,9 +3,12 @@
 <script type="text/javascript" charset="utf-8" src="main.js"></script>
 <script type="text/javascript" charset="utf-8" src="ace.js"></script>
 <link rel="shortcut icon" type="image/png" href="http://clappr.io/demo/i/favico.png"><script>
-function addExternal(){var e=document.getElementById("js-link");window.clappr.externals.push(e.value),addTag(e.value),e.value=""}function addTag(e){var a=["aliceblue","antiquewhite","azure","black","blue","brown","yellow","teal"],l=a[Math.floor(Math.random()*a.length)],n=document.createElement("span");n.style.backgroundColor=l,n.className="external-js",n.innerText=e.split(/\//).pop().split(/\./)[0],document.getElementById("external-js-panel").appendChild(n)}window.clappr=window.clappr||{},window.clappr.externals=[];</script>
-</head><body style="position:fixed;padding:0px;margin:0px;">
-<div id="player-wrapper"><script>
+function addExternal(){var e=document.getElementById("js-link");window.clappr.externals.push(e.value),addTag(e.value),e.value=""}
+function addTag(e){var a=["aliceblue","antiquewhite","azure","black","blue","brown","yellow","teal"],l=a[Math.floor(Math.random()*a.length)],n=document.createElement("span");n.style.backgroundColor=l,n.className="external-js",n.innerText=e.split(/\//).pop().split(/\./)[0],document.getElementById("external-js-panel").appendChild(n)}window.clappr=window.clappr||{},window.clappr.externals=[];
+</script><style type="text/css">
+html,body {height:100%; width:100%; padding:0; margin:0; }
+#player{position:fixed; height:100%;width:100%; padding:0; margin:0;}</style>	
+</head><body><div id="player-wrapper"><script>
       var urlParams;
       (function() {
         window.onpopstate = function () {
@@ -27,7 +30,7 @@ function addExternal(){var e=document.getElementById("js-link");window.clappr.ex
       var player = new Clappr.Player({
         source: urlParams.src || 'https://v.sharefa.st/shJfjxiAC4B2.mp4',
         poster: urlParams.poster || 'http://clappr.io/poster.png',
-        autoPlay: true,  mute:!1, height: 611, width: 1280, });
+        autoPlay: true,  mute:!1, height:"100%",width:"100%", });
       player.attachTo(playerElement);
       //editor
       window.onload = function() {
