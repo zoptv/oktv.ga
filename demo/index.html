@@ -4,7 +4,74 @@
 <script type="text/javascript" charset="utf-8" src="ace.js"></script>
 <link rel="shortcut icon" type="image/png" href="http://clappr.io/demo/i/favico.png"><script>
 function addExternal(){var e=document.getElementById("js-link");window.clappr.externals.push(e.value),addTag(e.value),e.value=""}function addTag(e){var a=["aliceblue","antiquewhite","azure","black","blue","brown","yellow","teal"],l=a[Math.floor(Math.random()*a.length)],n=document.createElement("span");n.style.backgroundColor=l,n.className="external-js",n.innerText=e.split(/\//).pop().split(/\./)[0],document.getElementById("external-js-panel").appendChild(n)}window.clappr=window.clappr||{},window.clappr.externals=[];</script>
-</head><body style="height:100%; width:100%; padding:0; margin:0;"><div id="player-wrapper"></div><script>
-var urlParams;window.onpopstate=function(){var e,t=/\+/g,a=/([^&=]+)=?([^&]*)/g,r=function(e){return decodeURIComponent(e.replace(t," "))},n=window.location.search.substring(1);for(urlParams={};e=a.exec(n);)urlParams[r(e[1])]=r(e[2])},window.onpopstate();var playerElement=document.getElementById("player-wrapper"),player=new Clappr.Player({source:urlParams.src||"http://clappr.io/highline.mp4",poster:urlParams.poster||"http://clappr.io/poster.png",mute:!1,padding:0,margin:0,height:595,width:1280
-});player.attachTo(playerElement),window.onload=function(){if(window.location.hash){var e=atob(window.location.hash.substr(1));document.getElementById("editor").innerHTML=e,setTimeout(o,0)}var t=ace.edit("editor"),a=t.getSession();t.setTheme("ace/theme/katzenmilch"),a.setMode("ace/mode/javascript"),a.setTabSize(2),a.setUseSoftTabs(!0);var r=new Parser($("#output")),n=function(e){if(window.clappr.externals.length>0){var t=window.clappr.externals.length;window.clappr.externals.forEach(function(a,r){var n=document.createElement("script");n.setAttribute("type","text/javascript"),n.setAttribute("src",a),r===t-1&&(n.onload=e),n.onerror=function(e){alert("we cant load "+a+": e"+e)},document.body.appendChild(n)})}else e()};function o(){var e=ace.edit("editor").getSession().getValue(),t=btoa(e);window.location.hash=t,n(function(){r.parse(e)})}$(".run").click(function(){o()})};
-</script></body></html>
+</head><body style="position:fixed;padding:0px;margin:0px;">
+<div id="player-wrapper"><script>
+      var urlParams;
+      (function() {
+        window.onpopstate = function () {
+          var match,
+              pl     = /\+/g,  // Regex for replacing addition symbol with a space
+              search = /([^&=]+)=?([^&]*)/g,
+              decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
+              query  = window.location.search.substring(1);
+
+          urlParams = {};
+          while (match = search.exec(query))
+            urlParams[decode(match[1])] = decode(match[2]);
+        }
+        window.onpopstate();
+      })();
+
+      var playerElement = document.getElementById("player-wrapper");
+
+      var player = new Clappr.Player({
+        source: urlParams.src || 'https://v.sharefa.st/shJfjxiAC4B2.mp4',
+        poster: urlParams.poster || 'http://clappr.io/poster.png',
+        autoPlay: true,  mute:!1, height: 611, width: 1280, });
+      player.attachTo(playerElement);
+      //editor
+      window.onload = function() {
+        if (window.location.hash) {
+          var editorContent = atob(window.location.hash.substr(1))
+          document.getElementById("editor").innerHTML = editorContent
+          setTimeout(run, 0)
+        }
+        var editor = ace.edit("editor");
+        var session = editor.getSession();
+        editor.setTheme("ace/theme/katzenmilch");
+        session.setMode("ace/mode/javascript");
+        session.setTabSize(2);
+        session.setUseSoftTabs(true);
+        var parser = new Parser($('#output'));
+        var load = function(fn) {
+          if (window.clappr.externals.length > 0) {
+            var lastScript = window.clappr.externals.length
+            window.clappr.externals.forEach(function(url, index) {
+	      var script = document.createElement('script')
+
+	      script.setAttribute("type", "text/javascript")
+	      script.setAttribute("src", url)
+              if (index === (lastScript - 1)) {
+		script.onload = fn
+              }
+	      script.onerror = function(e){alert('we cant load ' + url + ': e' + e)}
+
+	      document.body.appendChild(script)
+            })
+	  } else {
+	    fn()
+          }
+        }
+
+        $('.run').click(function() {
+          run()
+        });
+
+        function run() {
+          var code = ace.edit('editor').getSession().getValue();
+          var b64EncodedCode = btoa(code)
+          window.location.hash = b64EncodedCode
+          load(function(){parser.parse(code)})
+        }
+      }
+    </script></div> </body></html>
