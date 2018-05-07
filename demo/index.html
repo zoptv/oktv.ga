@@ -2,13 +2,71 @@
 <script type="text/javascript" charset="utf-8" src="https://cdn.jsdelivr.net/npm/clappr@latest/dist/clappr.min.js"></script>
 <script type="text/javascript" charset="utf-8" src="main.js"></script>
 <script type="text/javascript" charset="utf-8" src="ace.js"></script>
-<link rel="shortcut icon" type="image/png" href="http://clappr.io/demo/i/favico.png"><script>
-function addExternal(){var e=document.getElementById("js-link");window.clappr.externals.push(e.value),addTag(e.value),e.value=""}
-function addTag(e){var a=["aliceblue","antiquewhite","azure","black","blue","brown","yellow","teal"],l=a[Math.floor(Math.random()*a.length)],n=document.createElement("span");n.style.backgroundColor=l,n.className="external-js",n.innerText=e.split(/\//).pop().split(/\./)[0],document.getElementById("external-js-panel").appendChild(n)}window.clappr=window.clappr||{},window.clappr.externals=[];
-</script><style type="text/css">
-html,body {height:100%; width:100%; padding:0; margin:0; }
-#player{position:fixed; height:100%;width:100%; padding:0; margin:0;}</style>	
-</head><body><div id="player-wrapper"><script>
+<link rel="stylesheet" href="stylesheets/bootstrap.min.css" type="text/css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="stylesheets/bootstrap-theme.min.css" type="text/css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="stylesheets/style.css" type="text/css" media="screen" charset="utf-8">
+    <link rel="shortcut icon" type="image/png" href="i/favico.png">
+    <script>
+      window.clappr = window.clappr || {}
+      window.clappr.externals = []
+
+      function addExternal() {
+        var url = document.getElementById('js-link')
+        window.clappr.externals.push(url.value)
+        addTag(url.value)
+        url.value = ''
+      }
+
+      function addTag(url) {
+        var colors = ["aliceblue", "antiquewhite", "azure", "black", "blue", "brown", "yellow", "teal"]
+        var color = colors[Math.floor(Math.random() * colors.length)]
+        var span = document.createElement('span')
+
+        span.style.backgroundColor = color
+        span.className = "external-js"
+        span.innerText = url.split(/\//).pop().split(/\./)[0]
+
+        document.getElementById('external-js-panel').appendChild(span)
+      }
+    </script>
+  </head>
+  <body>
+    <header class="header">
+      <span>Clappr</span>
+      <ul>
+        <li><a href="http://clappr.github.io/">docs</a></li>
+      </ul>
+    </header>
+    <section class="container">
+      <div class="main">
+	<p id='external-js-panel'>
+	  Add external plugins:
+          <input id="js-link" type="url" placeholder="http://clappr.io/ex-plugin.js" style="width: 200px;">
+	  <button id="btn-link" onclick="addExternal()">+</button>
+	</p>
+        <div id="output">
+          <div id="player-wrapper" class="player"></div>
+        </div>
+      </div>
+      <div class="sidebar">
+        <div id="editor">var playerElement = document.getElementById("player-wrapper");
+
+var player = new Clappr.Player({
+  source: 'http://clappr.io/highline.mp4',
+  poster: 'http://clappr.io/poster.png',
+  mute:!1,
+  height: 360,
+  width: 640
+});
+
+player.attachTo(playerElement);
+</div>
+        <button class="run btn btn-primary">Run</button>
+        <div id="console"> </div>
+      </div>
+    </section>
+    <footer class="footer"></footer>
+    <script>
       var urlParams;
       (function() {
         window.onpopstate = function () {
@@ -28,23 +86,32 @@ html,body {height:100%; width:100%; padding:0; margin:0; }
       var playerElement = document.getElementById("player-wrapper");
 
       var player = new Clappr.Player({
-        source: urlParams.src || 'https://v.sharefa.st/shJfjxiAC4B2.mp4',
+        source: urlParams.src || 'http://clappr.io/highline.mp4',
         poster: urlParams.poster || 'http://clappr.io/poster.png',
-        autoPlay: true,  mute:!1, height:"100%",width:"100%", });
+        mute:!1,
+        height: 360,
+        width: 640
+      });
+
       player.attachTo(playerElement);
+
       //editor
       window.onload = function() {
+
         if (window.location.hash) {
           var editorContent = atob(window.location.hash.substr(1))
           document.getElementById("editor").innerHTML = editorContent
           setTimeout(run, 0)
         }
+
         var editor = ace.edit("editor");
         var session = editor.getSession();
+
         editor.setTheme("ace/theme/katzenmilch");
         session.setMode("ace/mode/javascript");
         session.setTabSize(2);
         session.setUseSoftTabs(true);
+
         var parser = new Parser($('#output'));
         var load = function(fn) {
           if (window.clappr.externals.length > 0) {
@@ -77,4 +144,4 @@ html,body {height:100%; width:100%; padding:0; margin:0; }
           load(function(){parser.parse(code)})
         }
       }
-    </script></div> </body></html>
+    </script></body></html>	
